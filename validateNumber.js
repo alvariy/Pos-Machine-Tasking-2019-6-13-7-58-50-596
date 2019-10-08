@@ -28,9 +28,58 @@ function CheckIfExisting (barcode) {
     return false;
 }
 
+function CheckPrice(barcode)
+{
+    for(let i = 0; i < db.length; i++)
+    {
+        if(String(db[i].id) === String(barcode))
+        {
+            // console.log(db[i].id);
+            return db[i].price;
+        }
+        
+    }
+
+    return 0;
+
+}
+
+function CountQuantity(barcode)
+{
+    let quantity = 0;
+    for(let i = 0; i < db.length; i++)
+    {
+        if(String(db[i].id) === String(barcode))
+        {
+            // console.log(db[i].id);
+            quantity += 1;
+        }
+        
+    }
+    return quantity;
+}
+
+function ComputeTotalPrice(barcodes)
+{
+    let totalPrice = 0;
+    for(let i = 0; i < db.length; i++)
+    {
+
+            // console.log(db[i].id);
+            totalPrice += CheckPrice(barcodes[i]);
+
+        
+    }
+    return totalPrice;
+
+}
 
 module.exports = {
-    CheckIfExisting : CheckIfExisting
+    CheckIfExisting : CheckIfExisting,
+    CountQuantity : CountQuantity,
+    CheckPrice : CheckPrice,
+    ComputeTotalPrice : ComputeTotalPrice
+
     // checkIfInRange : checkIfInRange,
     // MultiplyNumbers : MultiplyNumbers
 };
